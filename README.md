@@ -32,9 +32,14 @@
 
 ## Implementation
 
-Algorithms used, Cases covered and Example can be found **here**.
+Algorithms used, Cases covered and Example can be found **[here](https://github.com/karved/Drone-route-planning/blob/master/Implementation.md)**.
 
 ## Screenshots 
+![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/1.png)
+|||
+|--|--|
+|![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/2.png)|![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/3.png)|
+|![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/4.png)|![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/5.png)|
 
 ## Setup
 1. Clone this repository or download zip.  
