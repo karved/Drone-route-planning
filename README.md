@@ -32,15 +32,10 @@
 
 ## Implementation
 
-### Modifications to the Dijkstra’s Algorithm
----
+Algorithms used, Cases covered and Example can be found **here**.
 
-> We have used a modified version of the above algorithm which not only helps find the shortest path from **source to sink** but also does so while satisfying certain constraints such as covering the maximum area (**most number of nodes**) possible, rate of discharge of battery and visiting charging stations if required.
+## Screenshots 
 
-> We have used a modified **Euclidean** formula to calculate the distance between two points on the graph. Since we cannot directly use Euclidean because of the points being in (longitude, latitude) form instead of Cartesian coordinates(x, y), we had to modify it to find our distances in kilometers. 
-> We have also made use free online converters like https://mygeodata.cloud/converter/kml-to-shp to convert our downloaded **KML file from Google Earth/Scribble Maps to SHP** files so they can be used by the shapefile module of Python.
-
-#### Assumptions
-> To cover maximum Area all Nodes must be visited **once** but not mandatory to visit **all** Charging Stations. Distance is calculated and not Time so time taken to charge any Drone is considered to be equal. Charging is considered to be **100%** at the start and same after visiting Charging Station.
-
+## Setup
+1. 
 
