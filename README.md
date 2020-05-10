@@ -37,5 +37,23 @@ Algorithms used, Cases covered and Example can be found **here**.
 ## Screenshots 
 
 ## Setup
-1. 
+1. Clone this repository or download zip.  
+2. Navigate to project folder in terminal and type (if mentioned above **python modules** not installed)  
 
+   ```
+   pip install numpy
+   ``` 
+      ```
+      pip install gmplot
+      ```
+      ```
+      pip install pyshp
+      ```
+      ```
+      pip install pandas
+   ```
+3. To run the project,
+   ```
+    python djik.py
+   ```
+4. All set.
