@@ -1,8 +1,9 @@
 import numpy as np
-from project import *
+from project1 import *
 import gmplot
 import webbrowser
 from tkinter import *
+from tkinter import messagebox
 """
 n = int(input("Enter the no. of Nodes: "))
 print ("Enter the Matrix:")
@@ -14,6 +15,8 @@ for i in range(0,n):
 matrix = matrix.reshape(n,n)
 print("\nEntered Matrix:\n {0}\n".format(matrix))
 """
+
+"""
 pathy=root.filename[::-1]
 pathy= pathy[:(pathy.find('/')-1):-1]
 # print(pathy)
@@ -21,7 +24,7 @@ pathy= pathy[:(pathy.find('/')-1):-1]
 
 lat_list=[]
 long_list=[]
-colors= ["blue", "cyan", "green", "yellow", "brown", "purple", "violet"]
+colors= ["blue", "cyan", "green", "purple", "yellow", "brown", "violet"]
 for i in range(len(sf)):
     lat_list.append(l[i][1])
     long_list.append(l[i][0])
@@ -38,9 +41,14 @@ for i, j in zip(lat_list, long_list):
 gmap3.draw(pathy+"map30.html")
 url= (pathy+"map30.html")
 webbrowser.open(url, new=new)
+"""
+#pathy=pathy
+new=2
 
-
-n, matrix= inputs()
+n= n
+matrix= weight_matrix
+print(n)
+print(matrix)
 
 
 gmap1= gmplot.GoogleMapPlotter(mean_lat, mean_long, 13)
@@ -69,6 +77,8 @@ for i in range(len(sf)):
             edge_long_list.append(long_list[j])
             gmap1.plot(edge_lat_list, edge_long_list, 'black', edge_width= 2.5)
 
+
+"""
 # Souce Sink
 source = ord(str(input("Select Source Node: ")))
 source= source-65
@@ -87,6 +97,55 @@ if(bol==1):
     print(chst)
 else:
     chst=[]
+"""
+
+def details():
+    global source, sink, chst, drones, depr
+    chst= []
+    source= ord(src.get())
+    sink= ord(snk.get())
+    source= source - 65
+    sink= sink - 65
+    for i in range(n):
+        if chst_check[i].get()==1:
+            chst.append(chr(i+65))
+    drones= dro.get()
+    depr= depre.get()
+    charge_screen.destroy()
+
+charge_screen= Tk()
+charge_screen.geometry("800x600+200+200")
+Label(charge_screen, text="Choose source node: ").place(x=30, y=30)
+list1= []
+src= StringVar()
+snk= StringVar()
+for i in range(n):
+    list1.append(chr(i+65))
+droplist= OptionMenu(charge_screen, src, *list1)
+src.set('A')
+droplist.config(width=5)
+droplist.place(x= 150, y= 30)
+Label(charge_screen, text="Choose sink node: ").place(x= 30, y= 70)
+droplist1= OptionMenu(charge_screen, snk, *list1)
+snk.set('A')
+droplist1.config(width= 5)
+droplist1.place(x= 150, y= 70)
+Label(charge_screen, text="Choose charging stations if needed: ").place(x=30, y= 100)
+chst_check=[]
+for i in range(n):
+    chst_check.append(IntVar(charge_screen))
+xrange= 250
+for i  in range(n):
+    Checkbutton(charge_screen, text=chr(i+65), variable= chst_check[i]).place(x= xrange, y=100)
+    xrange= xrange +30
+dro= IntVar()
+depre= IntVar()
+Label(charge_screen, text="Enter no. of drones: ").place(x=30, y=130)
+Entry(charge_screen, textvar= dro).place(x=150, y=130)
+Label(charge_screen, text="Enter rate of loss: ").place(x= 30, y= 150)
+Entry(charge_screen, textvar= depre).place(x=150, y=150)
+Button(charge_screen, text="OK", command=details).place(x=30, y= 180)
+charge_screen.mainloop()
 
 if (len(chst))>0:
     charge_stn=[]
@@ -110,13 +169,14 @@ gmap1.draw(pathy+"map40.html")
 url= pathy+"map40.html"
 webbrowser.open(url, new=new)
 
-
+"""
 # No. of Drones and Battery
 drones = int(input("Enter No. of Drones: "))
 depr=(int(input("Enter the Loss Rate(% per unit): ")))
 while((0>depr) or (depr>100)):
     print("Invalid Entry")
     depr=(int(input("Enter the Loss Rate(% per unit): ")))
+"""
 
 battery = np.arange(drones)
 battery.fill(100)
@@ -218,6 +278,7 @@ def loc (x,source):
 # Calc Route
 color_count=0
 flag=0
+
 def calc(bat):
     global color_count, flag , reached
     route.reverse()
@@ -297,7 +358,7 @@ def calc(bat):
 # Djikstras for charging station
 def djik2(sink,source,battery):
     
-    
+    global flag
    
 
     prev.fill(99999)
@@ -319,7 +380,6 @@ def djik2(sink,source,battery):
     if(minis!=99999):
         loc(mini,source)
         bat,a= calc(battery)
-
         if(a < 99999):
             prev.fill(99999)
             w.fill(99999)
@@ -328,12 +388,10 @@ def djik2(sink,source,battery):
             w[mini]= 0
             route.clear()
             taken[sink]=0
-           
             djik(mini)
             loc(sink,mini)
-          
+            flag=1
             bat,wgt= calc(100)
-        
 
             return bat,(a+wgt)
 
@@ -386,7 +444,6 @@ def djik3(source):
                         w[i]=(w[j]+matrix[j,i])
                         prev[i]=j
                       
-
 
 
 root = Tk() 
