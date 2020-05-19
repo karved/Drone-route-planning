@@ -1,5 +1,5 @@
 import numpy as np
-from project1 import *
+from project import *
 import gmplot
 import webbrowser
 from tkinter import *
@@ -66,9 +66,10 @@ for i, j in zip(lat_list, long_list):
     gmap2.marker(i, j, "red", title=chr(points+65))
     points= points + 1
 
+
 for i in range(len(sf)):
     for j in range(len(sf)):
-        if edge_matrix[i][j]==1 and i>j:
+        if edge_matrix[i][j].get()==1 and i>j:
             edge_lat_list=[]
             edge_long_list=[]
             edge_lat_list.append(lat_list[i])
@@ -77,6 +78,9 @@ for i in range(len(sf)):
             edge_long_list.append(long_list[j])
             gmap1.plot(edge_lat_list, edge_long_list, 'black', edge_width= 2.5)
 
+gmap1.draw(pathy+"map40.html")
+url= pathy+"map40.html"
+webbrowser.open(url, new=new)
 
 """
 # Souce Sink
@@ -161,13 +165,10 @@ if (len(chst))>0:
     #gmap2.scatter(plot_chst_lat, plot_chst_long, 'blue', size=40, marker=False) 
     points=0
     for i, j in zip(plot_chst_lat, plot_chst_long):
-        gmap1.marker(i, j, "blue", title=chst[points])
+        #gmap1.marker(i, j, "blue", title=chst[points])
         gmap2.marker(i, j, "blue", title=chst[points])
         points= points + 1
 
-gmap1.draw(pathy+"map40.html")
-url= pathy+"map40.html"
-webbrowser.open(url, new=new)
 
 """
 # No. of Drones and Battery
