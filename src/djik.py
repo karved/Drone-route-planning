@@ -47,8 +47,8 @@ new=2
 
 n= n
 matrix= weight_matrix
-print(n)
-print(matrix)
+# print(n)
+# print(matrix)
 
 
 gmap1= gmplot.GoogleMapPlotter(mean_lat, mean_long, 13)
@@ -115,11 +115,22 @@ def details():
             chst.append(chr(i+65))
     drones= dro.get()
     depr= depre.get()
-    charge_screen.destroy()
+
+    
+    if((0>depr) or (depr>100)):
+                messagebox.showerror("INVALID", "Enter a Value between 0 and 100") 
+    else:
+                charge_screen.destroy()
+        
+    
+        
 
 charge_screen= Tk()
-charge_screen.geometry("800x600+200+200")
-Label(charge_screen, text="Choose source node: ").place(x=30, y=30)
+charge_screen.title("D-Route")
+charge_screen['bg']='light steel blue'
+charge_screen.geometry("700x500")
+
+Label(charge_screen, font=("calibri","15"),bg="light steel blue",text="Choose source node: ").place(x=30, y=30)
 list1= []
 src= StringVar()
 snk= StringVar()
@@ -127,28 +138,28 @@ for i in range(n):
     list1.append(chr(i+65))
 droplist= OptionMenu(charge_screen, src, *list1)
 src.set('A')
-droplist.config(width=5)
-droplist.place(x= 150, y= 30)
-Label(charge_screen, text="Choose sink node: ").place(x= 30, y= 70)
+droplist.config(width=5,bd="0",font=("calibri","15","bold"),bg="light steel blue")
+droplist.place(x= 400, y= 30)
+Label(charge_screen,bg="light steel blue", font=("calibri","15"),text="Choose sink node: ").place(x= 30, y= 90)
 droplist1= OptionMenu(charge_screen, snk, *list1)
 snk.set('A')
-droplist1.config(width= 5)
-droplist1.place(x= 150, y= 70)
-Label(charge_screen, text="Choose charging stations if needed: ").place(x=30, y= 100)
+droplist1.config(width= 5,bd="0",font=("calibri","15","bold"),bg="light steel blue")
+droplist1.place(x= 400, y= 80)
+Label(charge_screen, bg="light steel blue", font=("calibri","15"),text="Choose Charging Stations if needed\n(denoted in Blue): ").place(x=30, y= 150)
 chst_check=[]
 for i in range(n):
     chst_check.append(IntVar(charge_screen))
-xrange= 250
+xrange= 370
 for i  in range(n):
-    Checkbutton(charge_screen, text=chr(i+65), variable= chst_check[i]).place(x= xrange, y=100)
-    xrange= xrange +30
+    Checkbutton(charge_screen,bg="light steel blue" , font=("calibri","15","bold"),text=chr(i+65), variable= chst_check[i]).place(x= xrange, y=150)
+    xrange= xrange +50
 dro= IntVar()
 depre= IntVar()
-Label(charge_screen, text="Enter no. of drones: ").place(x=30, y=130)
-Entry(charge_screen, textvar= dro).place(x=150, y=130)
-Label(charge_screen, text="Enter rate of loss: ").place(x= 30, y= 150)
-Entry(charge_screen, textvar= depre).place(x=150, y=150)
-Button(charge_screen, text="OK", command=details).place(x=30, y= 180)
+Label(charge_screen,bg="light steel blue", font=("calibri","15"), text="Enter No. of drones: ").place(x=30, y=230)
+Entry(charge_screen, width="5",font=("calibri","15","bold"),textvar= dro).place(x=410, y=230)
+Label(charge_screen,bg="light steel blue", font=("calibri","15"), text="Enter the Loss Rate\n(% per unit): ").place(x= 30, y= 290)
+Entry(charge_screen,width="5", font=("calibri","15","bold"),textvar= depre).place(x=410, y=290)
+Button(charge_screen, font=("calibri","15"),width=10,activebackground="grey",bg="white",text="Plan Route", command=details).place(x=30, y= 380)
 charge_screen.mainloop()
 
 if (len(chst))>0:
@@ -448,16 +459,16 @@ def djik3(source):
 
 
 root = Tk() 
-root.title("DROUTER")
-root.geometry("600x600")    
+root.title("D-Route")
+root.geometry("600x700")    
 # #set window color
-root['bg']='black'
+root['bg']='light steel blue'
 
-label = Label(root, text = "\n---------Shortest Path---------",foreground="white",font="calibri",background="black")
+label = Label(root, text = "\nShortest Path ",font=("calibri","20","bold"),bg="light steel blue")
 label.pack()
   
 
-mylist = Text(root,height=250,font="calibri",width=30,foreground="white",background="black", borderwidth=0,highlightthickness=0) 
+mylist = Text(root,height=250,font=("calibri","15"),width=30,bg="light steel blue", borderwidth=0,highlightthickness=0) 
 mylist.pack(pady=20) 
 
 
@@ -486,7 +497,7 @@ while(i<m):
     
     if(w[sink]!=99999):
         dno=dno+1
-        mylist.insert(END,"Drone {0}:\n".format(dno))
+        mylist.insert(END,"\nDrone {0}:\n".format(dno))
         print("Drone {0}:".format(dno))
         loc(sink,source)
         reached=0
@@ -536,7 +547,7 @@ if(drones>path):
             djik(source)
             loc(i,source)
             dno=dno+1
-            mylist.insert(END,"Drone {0}:\n".format(dno))
+            mylist.insert(END,"\nDrone {0}:\n".format(dno))
             print("Drones {0}:".format(dno))
             flag=1
             reached=0
@@ -582,7 +593,7 @@ if(drones>path):
           
        
     for i in range(dno,dumd):
-        mylist.insert(END,"Drone {0}:\nNo unique path".format(i+1))
+        mylist.insert(END,"\nDrone {0}:\nNo unique path".format(i+1))
         print("Drone {0}:\nNo unique path".format(i+1))
         red=red+1
 
@@ -592,7 +603,7 @@ if(red!=0):
     mylist.insert(END,"\n\nMin. Drones Req: {0}".format(dumd-red))
     print("\nMin. Drones Req: {0}".format(dumd-red))
 
-
+mylist.insert(END,"\n\nLoss Rate: {0} %".format(depr))
 
 gmap2.draw(pathy+"map50.html")
 url= pathy+"map50.html"

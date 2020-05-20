@@ -52,29 +52,34 @@ def inputs():
 
     root.destroy()
     ip_screen= Tk()
+    ip_screen.title("D-Route")
+    ip_screen.geometry("600x500")
+    #set window color
+    ip_screen['bg']='light steel blue'
+
     edge_matrix= [[] * i for i in range(n)]
     for i in range(n):
         for j in range(n):
             edge_matrix[i].append(IntVar(ip_screen))
-    ip_screen.geometry("800x600+200+200")
+   
     text1=65
     text2=65
     for i in range(n):
-        Label(ip_screen, text=chr(text1)).grid(row= 1, column=i, padx=20)
+        Label(ip_screen,background="light steel blue", font=("calibri","15","bold"),width=6,text=chr(text1)).grid(row= 1, column=i, padx=20)
         text1= text1 + 1
     for i in range(n):
-        Label(ip_screen, text=chr(text2)).grid(row=i+2, sticky= W, pady=20)
+        Label(ip_screen,background="light steel blue",font=("calibri","15","bold"),width=6,text=chr(text2)).grid(row=i+2, sticky= W, pady=20)
         text2= text2 + 1
     zero_var=0
     for i in range(n):
         for j in range(n):
             if i==j:
-                Checkbutton(ip_screen, variable=zero_var).grid(row=i+2, column= j, padx=20)
+                Checkbutton(ip_screen,bg="light steel blue", variable=zero_var).grid(row=i+2, column= j, padx=20)
             elif i<j:
-                Checkbutton(ip_screen, variable=edge_matrix[i][j]).grid(row=i+2, column= j, padx=20)
+                Checkbutton(ip_screen,bg="light steel blue", variable=edge_matrix[i][j]).grid(row=i+2, column= j, padx=20)
             else:
-                Checkbutton(ip_screen, variable=edge_matrix[j][i]).grid(row=i+2, column= j, padx=20)
-    Button(ip_screen, text="OK", command= submit).grid(sticky=S)
+                Checkbutton(ip_screen,bg="light steel blue",variable=edge_matrix[j][i]).grid(row=i+2, column= j, padx=20)
+    Button(ip_screen,font=("calibri","15"),width=7,activebackground="grey",bg="white",text="Next -->", command= submit).grid(sticky=S)
     ip_screen.mainloop()
     #print(sf.shape(2).shapeTypeName)
     #n= len(sf)
@@ -123,18 +128,18 @@ def sel ():
 
 
 root = Tk()
-root.title("DROUTER")
+root.title("D-Route")
 root.geometry("400x250")
  
 
 #set window color
-root['bg']='black'
+root['bg']='light steel blue'
 
-button =Button(text="Select File",command=sel,font="calibri",width=10,activebackground="grey")
+button =Button(text="Select File",command=sel,font=("calibri","15"),width=10,activebackground="grey",bg="white")
 button.pack(pady=20) 
 e1 = Text(height=2, width=40)
 e1.pack()
-button1 =Button(text='Open', command=inputs,font="calibri",width=10) 
+button1 =Button(text='Open', command=inputs,font=("calibri","15"),width=10,activebackground="grey",bg="white") 
 button1.pack(pady=35) 
 
 root.mainloop()
