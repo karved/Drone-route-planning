@@ -7,6 +7,8 @@ from tkinter import filedialog
 from tkinter import *
 import gmplot
 import webbrowser
+from PIL import ImageTk,Image
+import os
 
 l=[]
 # print(l)
@@ -55,7 +57,7 @@ def inputs():
     ip_screen.title("D-Route")
     ip_screen.geometry("600x500")
     #set window color
-    ip_screen['bg']='light steel blue'
+    ip_screen['bg']='bisque'
 
     edge_matrix= [[] * i for i in range(n)]
     for i in range(n):
@@ -65,20 +67,20 @@ def inputs():
     text1=65
     text2=65
     for i in range(n):
-        Label(ip_screen,background="light steel blue", font=("calibri","15","bold"),width=6,text=chr(text1)).grid(row= 1, column=i, padx=20)
+        Label(ip_screen,background="bisque", font=("calibri","15","bold"),width=6,text=chr(text1)).grid(row= 1, column=i, padx=20)
         text1= text1 + 1
     for i in range(n):
-        Label(ip_screen,background="light steel blue",font=("calibri","15","bold"),width=6,text=chr(text2)).grid(row=i+2, sticky= W, pady=20)
+        Label(ip_screen,background="bisque",font=("calibri","15","bold"),width=6,text=chr(text2)).grid(row=i+2, sticky= W, pady=20)
         text2= text2 + 1
     zero_var=0
     for i in range(n):
         for j in range(n):
             if i==j:
-                Checkbutton(ip_screen,bg="light steel blue", variable=zero_var).grid(row=i+2, column= j, padx=20)
+                Checkbutton(ip_screen,bg="bisque", variable=zero_var).grid(row=i+2, column= j, padx=20)
             elif i<j:
-                Checkbutton(ip_screen,bg="light steel blue", variable=edge_matrix[i][j]).grid(row=i+2, column= j, padx=20)
+                Checkbutton(ip_screen,bg="bisque", variable=edge_matrix[i][j]).grid(row=i+2, column= j, padx=20)
             else:
-                Checkbutton(ip_screen,bg="light steel blue",variable=edge_matrix[j][i]).grid(row=i+2, column= j, padx=20)
+                Checkbutton(ip_screen,bg="bisque",variable=edge_matrix[j][i]).grid(row=i+2, column= j, padx=20)
     Button(ip_screen,font=("calibri","15"),width=7,activebackground="grey",bg="white",text="Next -->", command= submit).grid(sticky=S)
     ip_screen.mainloop()
     #print(sf.shape(2).shapeTypeName)
@@ -129,11 +131,27 @@ def sel ():
 
 root = Tk()
 root.title("D-Route")
-root.geometry("400x250")
+root.geometry("600x650")
  
 
+
+
+#set width and height
+
+canvas=Canvas(root,width=600,height=400)
+
+# used drone.jpeg from pics folder , took file directory of running file and traversed to pics folder
+target_path_2 = os.path.join(os.path.dirname(__file__), '..\pics\drone.jpeg')
+
+image=ImageTk.PhotoImage(Image.open(target_path_2))
+
+canvas.create_image(0,0,anchor=NW,image=image)
+canvas.pack()
+
+
 #set window color
-root['bg']='light steel blue'
+root['bg']='bisque'
+
 
 button =Button(text="Select File",command=sel,font=("calibri","15"),width=10,activebackground="grey",bg="white")
 button.pack(pady=20) 
