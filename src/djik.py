@@ -47,6 +47,7 @@ new=2
 
 n= n
 matrix= weight_matrix
+new_route=0
 # print(n)
 # print(matrix)
 
@@ -300,7 +301,8 @@ color_count=0
 flag=0
 
 def calc(bat):
-    global color_count, flag , reached
+    global color_count, flag , reached, no_charge_stn
+    no_charge_stn=0
     route.reverse()
     # print(route)
     weight = 0
@@ -309,7 +311,7 @@ def calc(bat):
 
         mylist.insert(END,chr(route[0]+65)+"-> ")
         print(chr(route[0]+65),end="-> ")
-
+               
         if(len(route)>1):
             for i in range(1,len(route)):
              if((route[i]!="none") and (route[i-1]!="none")):
@@ -321,8 +323,7 @@ def calc(bat):
 
                     if(route[i] not in chst):
                         taken[route[i]]=1
-
-
+                        
                     print(chr(route[i]+65),end="-> ")
                     mylist.insert(END,chr(route[i]+65)+"-> ")
 
@@ -333,27 +334,35 @@ def calc(bat):
                         
                         global plot_lat_list
                         global plot_long_list
-                        global color
-
+                        global color, new_route
                         plot_lat_list=[]
                         plot_long_list=[]
-                        for i in route[:-1]:
-                            plot_lat_list.append(lat_list[i])
-                            plot_long_list.append(long_list[i])
+                        #print(route)
+                        if new_route==0:
+                            for i in route[:-1]:
+                                plot_lat_list.append(lat_list[i])
+                                plot_long_list.append(long_list[i])
+                        elif new_route==1:
+                            for i in route[:-2]:
+                                plot_lat_list.append(lat_list[i])
+                                plot_long_list.append(long_list[i])
                         color= colors[color_count]
                         gmap2.plot(plot_lat_list, plot_long_list, color, edge_width=2.5)
                         flag=1
-                        #print(route)
-                        
                         route.clear()
                         print()
                         mylist.insert(END,"\n")
                         bat,a= djik2(s,s1,bat)
+                        print(no_charge_stn)
+                        if new_route==1:
+                            flag=1
+                        new_route=0
                         break
 
                     else:
                         print("No charge stn.")
                         mylist.insert(END,"No charge stn.\n")
+                        no_charge_stn=1
                         weight = 99999
                         break
 
@@ -365,16 +374,18 @@ def calc(bat):
         print("None")
     
     #print(route)
-    plot_lat_list=[]
-    plot_long_list=[]
-    for i in route:
-        plot_lat_list.append(lat_list[i])
-        plot_long_list.append(long_list[i])
-    color= colors[color_count]
-    gmap2.plot(plot_lat_list, plot_long_list, color, edge_width=2.5)
-    if flag==0:
-        color_count= color_count + 1
+    if no_charge_stn==0:
+        plot_lat_list=[]
+        plot_long_list=[]
+        for i in route:
+            plot_lat_list.append(lat_list[i])
+            plot_long_list.append(long_list[i])
+        color= colors[color_count]
+        gmap2.plot(plot_lat_list, plot_long_list, color, edge_width=2.5)
+        if flag==0:
+            color_count= color_count + 1
     flag=0
+
 
     
     return bat,(weight+a)
@@ -382,7 +393,7 @@ def calc(bat):
 # Djikstras for charging station
 def djik2(sink,source,battery):
     
-    global flag
+    global flag, no_charge_stn
    
 
     prev.fill(99999)
@@ -403,6 +414,7 @@ def djik2(sink,source,battery):
 
     if(minis!=99999):
         loc(mini,source)
+        #flag=1
         bat,a= calc(battery)
         if(a < 99999):
             prev.fill(99999)
@@ -418,15 +430,16 @@ def djik2(sink,source,battery):
             print()
             mylist.insert(END,"\n")
             bat,wgt= calc(100)
-
             return bat,(a+wgt)
 
         else:  
             reached = 0
+            no_charge_stn=1
             return bat,a
 
     else:
         a=99999
+        no_charge_stn=1
         print("no charge stn.")
         return battery,a
 
@@ -487,6 +500,9 @@ mylist.pack(pady=20)
 
 
 print("\n---------Shortest Path---------")
+
+
+
 dno=0
 arr = np.transpose(np.nonzero(matrix[0]))
 path = len(arr)
@@ -560,9 +576,10 @@ if(drones>path):
             source = s
             w[source]= 0
             rem[source]=1
-
             djik(source)
             loc(i,source)
+            new_route=1
+            
             dno=dno+1
             mylist.insert(END,"\nDrone {0}:\n".format(dno))
             print("Drones {0}:".format(dno))
