@@ -6,7 +6,7 @@ from math import radians, sin, cos, acos
 from tkinter import filedialog
 from tkinter import *
 import gmplot
-import webbrowser
+import webbrowser, random
 from PIL import ImageTk,Image
 import os
 
@@ -34,13 +34,23 @@ def inputs():
     
     lat_list=[]
     long_list=[]
-    colors= ["blue", "cyan", "green", "purple", "yellow", "brown", "violet"]
+    colors=[]
+    r= lambda : random.randint(0, 255)
+    for i in range(n):
+        s= '#%02X%02X%02X' % (r(),r(),r())
+        if s in colors:
+            i= i-1
+        else:
+            colors.append(s)
+    #colors= ["blue", "cyan", "green", "purple", "yellow", "brown", "violet"]
     for i in range(len(sf)):
         lat_list.append(l[i][1])
         long_list.append(l[i][0])
         mean_lat= np.mean(lat_list)
         mean_long= np.mean(long_list)
     
+    print(lat_list) #change here
+    print(long_list)
     new=2
     gmap3= gmplot.GoogleMapPlotter(mean_lat, mean_long, 13)
     gmap3.coloricon = "http://www.googlemapsmarkers.com/v1/%s/"
