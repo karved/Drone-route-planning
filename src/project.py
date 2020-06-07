@@ -5,6 +5,7 @@ import math
 from math import radians, sin, cos, acos
 from tkinter import filedialog
 from tkinter import *
+from tkinter import messagebox
 import gmplot
 import webbrowser, random
 from PIL import ImageTk,Image
@@ -12,10 +13,10 @@ import os
 
 l=[]
 # print(l)
-"""
-def euclidean_dist(x1, y1, x2, y2):
-    return int((math.sqrt((x1-x2)**2 + (y1-y2)**2))*300)
-"""
+# """
+# def euclidean_dist(x1, y1, x2, y2):
+#     return int((math.sqrt((x1-x2)**2 + (y1-y2)**2))*300)
+# """
 def dist_points(x1, y1, x2, y2):
      return int(6371.01 * acos(sin(radians(x1))*sin(radians(x2)) + cos(radians(x1))*cos(radians(x2))*cos(radians(y1) - radians(y2))))
   
@@ -64,10 +65,12 @@ def inputs():
 
     root.destroy()
     ip_screen= Tk()
-    ip_screen.title("D-Route")
+    ip_screen.title("D-Route : Check Nodes which are connected")
     ip_screen.geometry("600x500")
+
     #set window color
     ip_screen['bg']='bisque'
+    
 
     edge_matrix= [[] * i for i in range(n)]
     for i in range(n):
@@ -91,7 +94,10 @@ def inputs():
                 Checkbutton(ip_screen,bg="bisque", variable=edge_matrix[i][j]).grid(row=i+2, column= j, padx=20)
             else:
                 Checkbutton(ip_screen,bg="bisque",variable=edge_matrix[j][i]).grid(row=i+2, column= j, padx=20)
+
+
     Button(ip_screen,font=("calibri","15"),width=7,activebackground="grey",bg="white",text="Next -->", command= submit).grid(sticky=S)
+    messagebox.showinfo("Prompt","Check Nodes which are connected")
     ip_screen.mainloop()
     #print(sf.shape(2).shapeTypeName)
     #n= len(sf)
@@ -99,16 +105,16 @@ def inputs():
     #print(sf.shapes())
     #print(sf.shape(0))
     #print(sf.shape(0).points)
-    """
-    for i in range(n):
-        for j in range(n):
-            if i==j:
-                ip=0
-            elif i<j:
-                ip= int(input("Is there an edge between {0} and {1} (1 for yes, 0 for no)? ".format(chr(i+65), chr(j+65))))
-                edge_matrix[i][j]= ip
-                edge_matrix[j][i]= ip
-    """        
+    # """
+    # for i in range(n):
+    #     for j in range(n):
+    #         if i==j:
+    #             ip=0
+    #         elif i<j:
+    #             ip= int(input("Is there an edge between {0} and {1} (1 for yes, 0 for no)? ".format(chr(i+65), chr(j+65))))
+    #             edge_matrix[i][j]= ip
+    #             edge_matrix[j][i]= ip
+    # """        
 
     
 def submit():

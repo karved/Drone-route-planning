@@ -125,11 +125,14 @@ def details():
         if((chr(source+65) in chst) or (chr(sink+65) in chst)):
             messagebox.showwarning("Error","Source or Sink cannot be Charging Station !")
         else:
-
-            if((0>depr) or (depr>100)):
-                        messagebox.showerror("INVALID", "Enter a Value between 0 and 100") 
+            if(0>drones):
+                messagebox.showerror("INVALID", "Enter a Value greater than or equal to 0")
             else:
-                        charge_screen.destroy()
+
+                if((0>depr) or (depr>100)):
+                            messagebox.showerror("INVALID", "Enter a Value between 0 and 100") 
+                else:
+                            charge_screen.destroy()
         
     
         
