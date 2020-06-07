@@ -48,13 +48,13 @@ Algorithms used, Cases covered and Example can be found **[here](https://github.
 ## Pre-setup
 Follow these steps to convert any map into a **```.shp``` (Shapefile)** format :
 1. Open Google Maps  
-2. Go to **Your places --> MAPS --> CREATE MAP**   
+2. Go to **Your places →  MAPS →  CREATE MAP**   
 
 3. Add a **Title**, **Layer** and **Plot** desired points on the map. 
 
 4. Click on **Export to KML/KMZ**.  
 
-5. Select the layer --> **Export as KML** --> **Download**.  
+5. Select the layer →  **Export as KML** →  **Download**.  
    A **```.kml```** file will be downloaded.  
 
 6. Convert this file to **```.shp```**.  
