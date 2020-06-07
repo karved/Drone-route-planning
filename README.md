@@ -39,11 +39,15 @@
 Algorithms used, Cases covered and Example can be found **[here](https://github.com/karved/Drone-route-planning/blob/master/Implementation.md)**.
 
 ## Screenshots 
-![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/1.png)
 |||
 |--|--|
-|![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/2.png)|![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/3.png)|
-|![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/4.png)|![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/5.png)|
+|![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/A.png)|![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/B.png)|
+|![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/C.png)|![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/D.png)|
+|![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/E.png)|![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/F.png)|
+|![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/G.png)||
+|![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/I.png)|![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/H.png)|
+|![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/K.png)|![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/J.png)|
+|![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/L.png)|![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/M.png)|
 
 ## Pre-setup
 Follow these steps to convert any map into a **```.shp``` (Shapefile)** format :
