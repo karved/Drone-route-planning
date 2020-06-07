@@ -45,6 +45,23 @@ Algorithms used, Cases covered and Example can be found **[here](https://github.
 |![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/2.png)|![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/3.png)|
 |![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/4.png)|![alt text](https://github.com/karved/Drone-route-planning/blob/master/pics/5.png)|
 
+## Pre-setup
+Follow these steps to convert any map into a **```.shp``` (Shapefile)** format :
+1. Open Google Maps  
+2. Go to **Your places --> MAPS --> CREATE MAP**   
+
+3. Add a **Title**, **Layer** and **Plot** desired points on the map. 
+
+4. Click on **Export to KML/KMZ**.  
+
+5. Select the layer --> **Export as KML** --> **Download**.  
+   A **```.kml```** file will be downloaded.  
+
+6. Convert this file to **```.shp```**.  
+   You can use online converters like https://mygeodata.cloud/converter/kml-to-shp
+
+7. Download this  ```.shp``` file.
+
 ## Setup
 1. Clone this repository or download zip.  
 2. Open this repository on terminal. Navigate to [src](https://github.com/karved/Drone-route-planning/tree/master/src) folder by typing ```cd src```.
@@ -55,8 +72,8 @@ Algorithms used, Cases covered and Example can be found **[here](https://github.
    pip install numpy, gmplot, pyshp, pandas, Pillow
    ``` 
    
-3. To run the project,
+4. To run the project,
    ```
     python3 djik.py
    ```
-4. All set.
+5. All set.
